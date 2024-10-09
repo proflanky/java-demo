@@ -54,7 +54,7 @@ pipeline {
                 // Build the Docker image using Kaniko
                  container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
-                    /kaniko/executor --dockerfile `pwd`/Dockerfile --cache=true --context /home/jenkins/agent/workspace/ --destination=proflanky/javademo:1.0.${BUILD_NUMBER}
+                    /kaniko/executor --dockerfile `pwd`/Dockerfile --cache=true --context /home/jenkins/agent/workspace/java-demo --destination=proflanky/javademo:1.0.${BUILD_NUMBER}
                     '''
                     // The Kaniko build step will be handled by the args specified in the container YAML above
                 }
