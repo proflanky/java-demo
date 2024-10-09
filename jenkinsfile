@@ -33,7 +33,6 @@ pipeline {
                 container('git'){
                 // Checkout the code from the repository
                 checkout scm
-                }
             }
         }
     }
