@@ -13,8 +13,8 @@ pipeline {
                 image: bitnami/git:latest
                 command: ["sleep", "3600"]
               - name: kaniko
-                image: gcr.io/kaniko-project/executor:latest
-                args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=docker.io/proflanky/java-ddemo:latest"]
+                image: gcr.io/kaniko-project/executor:debug
+                args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=docker.io/proflanky/java-demo:latest"]
                 volumeMounts:
                 - name: docker-config
                   mountPath: /kaniko/.docker
