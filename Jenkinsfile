@@ -9,7 +9,7 @@ pipeline {
             kind: Pod
             spec:
               containers:
-              - name : git
+              - name: git
                 image: bitnami/git:latest
                 command ["sleep", "3600"]
               - name: kaniko
