@@ -1,16 +1,19 @@
-Java Maven Contact Form App
+# Java Maven Contact Form App
+
 This project demonstrates a simple Java Spring Boot application that includes a contact form, built using Maven and containerized for deployment. It serves as an example for demonstrating Continuous Integration (CI) practices on a Java Maven application. The application also showcases how to avoid Docker-in-Docker (dind) by utilizing a Kubernetes pod as the build agent.
 
-Features
-Spring Boot application with a simple contact form.
-Demonstrates CI setup with Maven and containerization.
-Docker multi-stage build for efficient image creation.
-Uses Kubernetes pod as a build agent to avoid Docker-in-Docker (dind).
-Project Structure
+## Features
+
+- Spring Boot application with a simple contact form.
+- Demonstrates CI setup with Maven and containerization.
+- Docker multi-stage build for efficient image creation.
+- Uses Kubernetes pod as a build agent to avoid Docker-in-Docker (dind).
+
+## Project Structure
+
 The project follows a standard Maven structure:
 
-bash
-Copy code
+```bash
 ├── src
 │   ├── main
 │   │   ├── java
@@ -26,32 +29,30 @@ Copy code
 ├── Dockerfile                                    # Dockerfile for building the container
 ├── pom.xml                                       # Maven build configuration
 └── README.md                                     # Project documentation
-Prerequisites
-Java 17 or higher
-Maven 3.9.4 or higher
-Docker (for containerization)
-Kubernetes (for build agent and deployment)
-Setup
+```
+## Setup
 Clone the Repository
-bash
-Copy code
+```bash
 git clone https://github.com/proflanky/java-demo.git
 cd java-demo
-Build the Project
+```
+## Build the Project
 Use Maven to build the application:
 
-bash
-Copy code
+```bash
+
 mvn clean package
+```
 Run the Application Locally
 To run the application locally, use:
 
-bash
-Copy code
+```bash
+
 mvn spring-boot:run
+```
 The application will be available at http://localhost:8080.
 
-Continuous Integration
+## Continuous Integration
 This project demonstrates how to set up CI using a Kubernetes pod as the build agent, avoiding Docker-in-Docker (dind).
 
 Key Points:
