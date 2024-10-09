@@ -19,7 +19,7 @@ pipeline {
                 image: gcr.io/kaniko-project/executor:debug
                 command:
                 - /busybox/cat
-                tty:true
+                tty: true
                 volumeMounts:
                 - name: docker-config
                   mountPath: /kaniko/.docker
