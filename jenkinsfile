@@ -31,10 +31,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                container('jnlp'){
                 // Checkout the code from the repository
                 checkout scm
+                }
             }
         }
+    }
         stage('Build and Push') {
             steps {
                 // Build the Docker image using Kaniko
