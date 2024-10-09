@@ -2,16 +2,15 @@ pipeline {
     agent {
         // Use a Kubernetes agent or any other supported agent that has access to Kaniko
         kubernetes {
+            label 'jenkinsrun'
+            defaultContainer 'kaniko'
             yaml """
             apiVersion: v1
             kind: Pod
-            metadata:
-              labels:
-                some-label: kaniko
             spec:
               containers:
-              - name : jnlp
-                image: jenkins/inbound-agent:3261.v9c670a_4748a_9-1
+              - name : git
+                image: bitnami/git:latest
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:latest
                 args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=docker.io/yourusername/your-image:latest"]
@@ -31,7 +30,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                container('jnlp'){
+                container('git'){
                 // Checkout the code from the repository
                 checkout scm
                 }
