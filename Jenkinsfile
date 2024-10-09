@@ -27,6 +27,9 @@ pipeline {
               - name: docker-config
                 secret:
                   secretName: docker-config-secret
+                  items:
+                    - key: .dockerconfigjson
+                      path: config.json
             """
         }
     }
@@ -43,6 +46,10 @@ pipeline {
         }
     }
         stage('Build and Push') {
+            environment {
+                PATH = "/busybox:$PATH"
+                REGISTRY = 'proflanky/javademo'
+            }
             steps {
                 // Build the Docker image using Kaniko
                  container(name: 'kaniko', shell: '/busybox/sh') {
