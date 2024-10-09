@@ -11,7 +11,7 @@ pipeline {
               containers:
               - name: git
                 image: bitnami/git:latest
-                command ["sleep", "3600"]
+                command: ["sleep", "3600"]
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:latest
                 args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=docker.io/proflanky/java-ddemo:latest", "&&", "sleep", "3600"]
