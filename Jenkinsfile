@@ -11,10 +11,15 @@ pipeline {
               containers:
               - name: git
                 image: bitnami/git:latest
-                command: ["sleep", "3600"]
+                command: 
+                - sleep
+                args:
+                - 99d
               - name: kaniko
                 image: gcr.io/kaniko-project/executor:debug
-                args: ["--context=dir://workspace/", "--dockerfile=Dockerfile", "--destination=docker.io/proflanky/java-demo:latest"]
+                command:
+                - /busybox/cat
+                tty:true
                 volumeMounts:
                 - name: docker-config
                   mountPath: /kaniko/.docker
@@ -40,8 +45,10 @@ pipeline {
         stage('Build and Push') {
             steps {
                 // Build the Docker image using Kaniko
-                container('kaniko') {
-                    sh 'echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"username\":\"$DOCKER_USERNAME\",\"password\":\"$DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json'
+                 container(name: 'kaniko', shell: '/busybox/sh') {
+                    sh '''#!/busybox/sh
+                    /kaniko/executor --dockerfile `pwd`/Dockerfile --cache=true --context /home/jenkins/agent/workspace/ --destination=proflanky/javademo:1.0.${BUILD_NUMBER}
+                    '''
                     // The Kaniko build step will be handled by the args specified in the container YAML above
                 }
             }
